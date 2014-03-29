@@ -17,7 +17,7 @@ def P(x, pts, point_range):
     y_j = pts[j][1]
 
     # base case P(x) for a single point is just y
-    if i==j:
+    if i == j:
         return y_i
     else:
         p_left = P(x, pts, (i+1, j))
