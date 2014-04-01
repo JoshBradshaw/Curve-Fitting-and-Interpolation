@@ -1,4 +1,6 @@
+from __future__ import division
 from pprint import pprint
+from math import *
 
 
 """
@@ -24,6 +26,8 @@ def divided_differences(pts):
         pts = diffs
     return divided_differences
 
+
+
 def divided_differences(diffs_table):
     # just playing
     # implementation more closely refects the formula
@@ -38,10 +42,8 @@ def divided_differences(diffs_table):
             dd = (y_i1 - y_i)/(x_i1 - x_i)
             diffs.append((x_i, dd))
         diffs_table.append(diffs)
-        divided_differences(x, diffs_table)
+        divided_differences(diffs_table)
         return diffs_table
 
-def interpolate_curve(x, )
 
-
-pprint(divided_differences([measured_points]))
+pprint(divided_differences([[(-1,e), (0,1), (1, e)]]))

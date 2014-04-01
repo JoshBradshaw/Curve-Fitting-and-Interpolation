@@ -11,10 +11,8 @@ def P(x, pts, point_range):
     # values in a hash table
 
     i, j = point_range
-    x_i = pts[i][0]
-    y_i = pts[i][1]
-    x_j = pts[j][0]
-    y_j = pts[j][1]
+    x_i, y_i = pts[i]
+    x_j, y_j = pts[j]
 
     # base case P(x) for a single point is just y
     if i == j:
@@ -26,4 +24,17 @@ def P(x, pts, point_range):
         x_j = pts[j][0]
         return ((x - x_i)*p_left - (x - x_j)*p_right)/(x_j - x_i)
 
-print P(1.5, measured_points, (0, 6))
+def divided_differences(pts):
+    divided_differences = []
+    while len(pts)>1:
+        diffs = []
+        for (pt_i, pt_i1) in batch_gen(pts, 2):
+            x_i, y_i = pt_i
+            x_i1, y_i1 = pt_i1
+            dd = (y_i1 - y_i)/(x_i1 - x_i)
+            diffs.append((x_i, dd))
+        divided_differences.append(diffs)
+        pts = diffs
+    return divided_differences
+from pprint import pprint
+pprint(divided_differences([(2,-1), (4,4), (5, 8)]))

@@ -1,5 +1,9 @@
 from __future__ import division
-measured_points = [(0, 0), (1, 1.6), (2, 3.8), (3, 4.5), (4, 6.3), (5, 9.2), (6, 10.0)]
+from math import *
+
+# to add: theoretical error bound with sympy
+
+measured_points = [(0, 0), (pi/4, 1/sqrt(2)), (pi/2, 1)]
 
 
 def lagrange_polynomial(interpolating_x, measured_points):
@@ -21,4 +25,19 @@ def lagrange_polynomial(interpolating_x, measured_points):
         interpolated_value += Lnj_x
     return interpolated_value
 
-print lagrange_polynomial(interpolating_x, measured_points)
+print lagrange_polynomial(pi/3, measured_points)
+
+import matplotlib.pyplot as plt
+import numpy as np
+x_vals = np.arange(0, pi/2, 0.01)
+print x_vals
+
+sin_y_vals = []
+approx_vals = []
+for x in x_vals:
+    sin_y_vals.append(sin(x))
+    approx_vals.append(lagrange_polynomial(x, measured_points))
+
+plt.plot(x_vals, sin_y_vals, 'ro', x_vals, approx_vals, 'r--')
+plt.axis([0, 6, 0, 20])
+plt.show()
